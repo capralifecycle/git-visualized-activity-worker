@@ -53,10 +53,11 @@ get_project_name() {
   project_map=$1
   reponame=$2
   project_col=$3
+  org=$4
 
   project_name=$(echo "$project_map" | grep "^$reponame," | cut -d, -f$project_col)
   if [ "$project_name" == "" ]; then
-    project_name="unknown"
+    project_name="unknown-$org"
   fi
 
   echo "$project_name"
@@ -81,7 +82,7 @@ get_repos_def() {
   fi
 
   while read -r reponame; do
-    project_name=$(set -e; get_project_name "$project_map" "$reponame" $project_column)
+    project_name=$(set -e; get_project_name "$project_map" "$reponame" $project_column "$org")
     branch=$(cd "$root/repos/$org/$reponame" && git rev-parse --abbrev-ref HEAD)
 
     echo "$reponame,$branch,$project_name"
