@@ -24,6 +24,7 @@ install_cals_cli
 fetch_gva
 
 fetch_cals_tools
+fetch_resources_definition
 setup_mailmap
 
 process_repos

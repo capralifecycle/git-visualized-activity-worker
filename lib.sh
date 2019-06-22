@@ -15,6 +15,11 @@ fetch_cals_tools() {
   git clone --depth 1 https://github.com/capralifecycle/cals-tools.git "$root/cals-tools"
 }
 
+fetch_resources_definition() {
+  rm "$root/resources-definition" -rf || :
+  git clone --depth 1 https://github.com/capralifecycle/resources-definition.git "$root/resources-definition"
+}
+
 refresh_git_repos() {
   org=$1
   repos=$2
@@ -62,11 +67,11 @@ get_repos_def() {
   repos=$2
 
   if [ "$org" == "capralifecycle" ]; then
-    project_map=$(set -e; ./extract-capralifecycle-projects.py "$root/cals-tools")
+    project_map=$(set -e; ./extract-projects.py capralifecycle "$root/resources-definition")
     project_column=2
   elif [ "$org" == "capraconsulting" ]; then
-    project_map=$(cat "$root/cals-tools/github/stats/repo-list-capraconsulting.csv")
-    project_column=3
+    project_map=$(set -e; ./extract-projects.py capraconsulting "$root/resources-definition")
+    project_column=2
   elif [ "$org" == "Cantara" ]; then
     project_map=$(cat "$root/cals-tools/github/stats/repo-list-Cantara.csv")
     project_column=3
