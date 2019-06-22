@@ -31,11 +31,7 @@ aws-vault exec capra -- \
     -e CALS_GITHUB_TOKEN \
     -e BUCKET_NAME \
     -e CF_DISTRIBUTION \
-    -w /app \
     gva-test
-
-# Inside the container
-./main.sh
 ```
 
 `main.sh` can also be used outside Docker, but you will need to have the
