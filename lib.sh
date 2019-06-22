@@ -2,9 +2,7 @@
 set -eu
 
 install_cals_cli() {
-  rm "$root/cals-cli" -rf || :
-  git clone --depth 1 https://github.com/capralifecycle/cals-cli.git "$root/cals-cli"
-  (cd "$root/cals-cli" && npm install && npm link)
+  npm install -g @capraconsulting/cals-cli
 }
 
 fetch_gva() {
