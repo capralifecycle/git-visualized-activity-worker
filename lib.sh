@@ -52,10 +52,11 @@ refresh_git_repos() {
 get_project_name() {
   project_map=$1
   reponame=$2
-  project_col=$3
-  org=$4
+  repo_col=$3
+  project_col=$4
+  org=$5
 
-  project_name=$(echo "$project_map" | grep "^$reponame," | cut -d, -f$project_col)
+  project_name=$(echo "$project_map" | awk -v reponame="$reponame" "{ if ($repo_col == reponame) { print $project_col } }")
   if [ "$project_name" == "" ]; then
     project_name="unknown-$org"
   fi
@@ -70,19 +71,22 @@ get_repos_def() {
   if [ "$org" == "capralifecycle" ]; then
     project_map=$(set -e; ./extract-projects.py capralifecycle "$root/resources-definition")
     project_column=2
+    repo_column=1
   elif [ "$org" == "capraconsulting" ]; then
     project_map=$(set -e; ./extract-projects.py capraconsulting "$root/resources-definition")
     project_column=2
+    repo_column=1
   elif [ "$org" == "Cantara" ]; then
-    project_map=$(cat "$root/cals-tools/github/stats/repo-list-Cantara.csv")
-    project_column=3
+    project_map=$(cat "$root/cals-tools/github/stats/project-map-Cantara.csv")
+    project_column=1
+    repo_column=2
   else
     echo "Unknown org: $org"
     exit 1
   fi
 
   while read -r reponame; do
-    project_name=$(set -e; get_project_name "$project_map" "$reponame" $project_column "$org")
+    project_name=$(set -e; get_project_name "$project_map" "$reponame" $repo_column $project_column "$org")
     branch=$(cd "$root/repos/$org/$reponame" && git rev-parse --abbrev-ref HEAD)
 
     echo "$reponame,$branch,$project_name"
