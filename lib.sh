@@ -124,7 +124,7 @@ process_repos() {
 }
 
 setup_mailmap() {
-  (cd "$root/cals-tools/github/stats" && git config --global mailmap.file "$PWD/mailmap.txt")
+  (cd "$root/resources-definition" && git config --global mailmap.file "$PWD/git-mailmap.txt")
 }
 
 upload_commits() {
