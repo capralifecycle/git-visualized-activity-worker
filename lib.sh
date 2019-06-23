@@ -113,7 +113,8 @@ process_repos() {
     "$root/git-visualized-activity/generate-commits.sh" clean
   )
 
-  for org in capralifecycle capraconsulting Cantara; do
+  # TODO: Re-add some repos from Cantara
+  for org in capralifecycle capraconsulting; do
     mkdir -p "$root/repos/$org"
     repos=$(set -e; get_repo_list $org)
 
