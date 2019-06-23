@@ -56,7 +56,7 @@ get_project_name() {
   project_col=$4
   org=$5
 
-  project_name=$(echo "$project_map" | awk -v reponame="$reponame" "{ if ($repo_col == reponame) { print $project_col } }")
+  project_name=$(echo "$project_map" | awk -F, -v reponame="$reponame" "{ if (\$$repo_col == reponame) { print \$$project_col } }")
   if [ "$project_name" == "" ]; then
     project_name="unknown-$org"
   fi
