@@ -108,7 +108,10 @@ get_repo_list() {
 }
 
 process_repos() {
-  "$root/git-visualized-activity/generate-commits.sh" clean
+  (
+    cd "$root"
+    "$root/git-visualized-activity/generate-commits.sh" clean
+  )
 
   for org in capralifecycle capraconsulting Cantara; do
     mkdir -p "$root/repos/$org"
@@ -118,7 +121,10 @@ process_repos() {
 
     repo_def=$(set -e; get_repos_def "$org" "$repos")
     if [ "$repo_def" != "" ]; then
-      SKIP_REFRESH_STALE=y "$root/git-visualized-activity/generate-commits.sh" add-group <(echo "$repo_def") $org "$root/repos/$org"
+      (
+        cd "$root"
+        SKIP_REFRESH_STALE=y "$root/git-visualized-activity/generate-commits.sh" add-group <(echo "$repo_def") $org "$root/repos/$org"
+      )
     fi
   done
 }
