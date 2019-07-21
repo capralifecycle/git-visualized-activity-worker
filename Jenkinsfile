@@ -51,6 +51,7 @@ buildConfig([
         ]).trim() + '-' + env.BUILD_NUMBER
 
         img.push(tagName)
+        img.push('latest')
         slackNotify message: "New Docker image available: $dockerImageName:$tagName"
       }
     }
