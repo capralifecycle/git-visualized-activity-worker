@@ -1,5 +1,7 @@
 # git-visualized-activity-worker
 
+[![Build Status](https://jenkins.capra.tv/buildStatus/icon?job=cals-internal/git-visualized-activity-worker/master)](https://jenkins.capra.tv/job/cals-internal/job/git-visualized-activity-worker/job/master/)
+
 This project builds a Docker image that we schedule to run as a
 Fargate task. The container will clone all repos, generate `commits.csv`
 and upload this to the distribution used for
