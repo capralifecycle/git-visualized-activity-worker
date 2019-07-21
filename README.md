@@ -6,7 +6,8 @@ and upload this to the distribution used for
 https://github.com/capraconsulting/git-visualized-activity/
 that is deployed at https://gva.capra.tv.
 
-TODO: Link to CloudFormation setup.
+The internal CloudFormation setup is stored at
+https://github.com/capralifecycle/aws-infrastructure/tree/master/cloudformation/git-visualized-activity
 
 ## Testing locally using Docker and aws-vault
 
