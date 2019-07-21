@@ -7,7 +7,7 @@ import yaml
 
 def get_resources(resources_dir):
     with open(os.path.join(resources_dir, "resources.yaml"), "r") as f:
-        return yaml.load(f)
+        return yaml.safe_load(f)
 
 
 def build_list(resources_dir, github_organization):
