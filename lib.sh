@@ -1,6 +1,15 @@
 #!/bin/bash
 set -eu
 
+get_param() {
+  name=$1
+  aws ssm get-parameter \
+    --name "$PARAMS_PREFIX/$name" \
+    --with-decryption \
+    --query Parameter.Value \
+    --output text
+}
+
 install_cals_cli() {
   npm install -g @capraconsulting/cals-cli
 }

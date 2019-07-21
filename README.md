@@ -11,7 +11,10 @@ TODO: Link to CloudFormation setup.
 ## Testing locally using Docker and aws-vault
 
 ```bash
-# Edit these
+# Fetch configuration from this namespace.
+export PARAMS_PREFIX=/git-visualized-activity/prod
+
+# To override configuration, these can be set.
 export CALS_GITHUB_TOKEN=personal-access-token-read-scope
 export BUCKET_NAME=s3-bucket-to-upload-to
 export CF_DISTRIBUTION=cloudfront-distribution-to-invalidate
@@ -24,10 +27,13 @@ aws-vault exec capra -- \
   docker run \
     -it --rm \
     -v "$PWD:/data" \
-    -e AWS_REGION \
+    -v "$PWD/main.sh:/app/main.sh" \
+    -v "$PWD/lib.sh:/app/lib.sh" \
+    -e AWS_DEFAULT_REGION \
     -e AWS_ACCESS_KEY_ID \
     -e AWS_SECRET_ACCESS_KEY \
     -e AWS_SESSION_TOKEN \
+    -e PARAMS_PREFIX \
     -e CALS_GITHUB_TOKEN \
     -e BUCKET_NAME \
     -e CF_DISTRIBUTION \

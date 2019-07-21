@@ -1,5 +1,5 @@
 #!/bin/bash
-set -eu
+set -eu -o pipefail
 
 source lib.sh
 
@@ -8,6 +8,19 @@ if [ -n "${DATA_DIR:-}" ]; then
   root=$DATA_DIR
 else
   root=$PWD
+fi
+
+# Fetch parameters if PARAMS_PREFIX is set.
+if [ -n "${PARAMS_PREFIX:-}" ]; then
+  if [ -z "${CALS_GITHUB_TOKEN:-}" ]; then
+    export CALS_GITHUB_TOKEN=$(get_param github-token)
+  fi
+  if [ -z "${BUCKET_NAME:-}" ]; then
+    export BUCKET_NAME=$(get_param web-bucket-name)
+  fi
+  if [ -z "${CF_DISTRIBUTION:-}" ]; then
+    export CF_DISTRIBUTION=$(get_param cf-distribution-id)
+  fi
 fi
 
 # When running in Docker, we need some extra parameters and setup.
