@@ -11,8 +11,6 @@ RUN set -eux; \
       perl \
       pkgconfig \
       py3-pip \
-      # Python 2 needed for node-gyp during cals-cli install. No Python 3 support.
-      python2 \
       python3 \
     ; \
     pip3 install awscli; \
@@ -24,4 +22,10 @@ ENV DATA_DIR /data
 COPY * /app/
 
 WORKDIR /app
+
+# renovate: datasource=npm depName=@capraconsulting/cals-cli
+ENV CALS_CLI_VERSION=2.9.4
+
+RUN npm install -g @capraconsulting/cals-cli@${CALS_CLI_VERSION}
+
 CMD ["/app/main.sh"]

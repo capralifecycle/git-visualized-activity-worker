@@ -10,10 +10,6 @@ get_param() {
     --output text
 }
 
-install_cals_cli() {
-  npm install -g @capraconsulting/cals-cli
-}
-
 fetch_gva() {
   rm "$root/git-visualized-activity" -rf || :
   git clone --depth 1 https://github.com/capraconsulting/git-visualized-activity.git "$root/git-visualized-activity"
