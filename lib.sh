@@ -20,9 +20,14 @@ fetch_cals_tools() {
   git clone --depth 1 https://github.com/capralifecycle/cals-tools.git "$root/cals-tools"
 }
 
-fetch_resources_definition() {
-  rm "$root/resources-definition" -rf || :
-  git clone --depth 1 https://github.com/capralifecycle/resources-definition.git "$root/resources-definition"
+fetch_resources_definition_capra() {
+  rm "$root/resources-definition-capra" -rf || :
+  git clone --depth 1 https://github.com/capraconsulting/resources-definition.git "$root/resources-definition-capra"
+}
+
+fetch_resources_definition_liflig() {
+  rm "$root/resources-definition-liflig" -rf || :
+  git clone --depth 1 https://github.com/capralifecycle/resources-definition.git "$root/resources-definition-liflig"
 }
 
 refresh_git_repos() {
@@ -74,11 +79,11 @@ get_repos_def() {
   repos=$2
 
   if [ "$org" == "capralifecycle" ]; then
-    project_map=$(set -e; ./extract-projects.py capralifecycle "$root/resources-definition")
+    project_map=$(set -e; ./extract-projects.py capralifecycle "$root/resources-definition-liflig")
     project_column=2
     repo_column=1
   elif [ "$org" == "capraconsulting" ]; then
-    project_map=$(set -e; ./extract-projects.py capraconsulting "$root/resources-definition")
+    project_map=$(set -e; ./extract-projects.py capraconsulting "$root/resources-definition-capra")
     project_column=2
     repo_column=1
   elif [ "$org" == "Cantara" ]; then
@@ -136,7 +141,7 @@ process_repos() {
 }
 
 setup_mailmap() {
-  (cd "$root/resources-definition" && git config --global mailmap.file "$PWD/git-mailmap.txt")
+  (cd "$root/resources-definition-liflig" && git config --global mailmap.file "$PWD/git-mailmap.txt")
 }
 
 upload_commits() {

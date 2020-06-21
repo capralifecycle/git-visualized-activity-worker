@@ -36,7 +36,8 @@ fi
 fetch_gva
 
 fetch_cals_tools
-fetch_resources_definition
+fetch_resources_definition_capra
+fetch_resources_definition_liflig
 setup_mailmap
 
 process_repos
