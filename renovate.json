@@ -8,5 +8,6 @@
         "datasource=(?<datasource>.*?) depName=(?<depName>.*?)\\sENV .*?_VERSION=(?<currentValue>.*)\\s"
       ]
     }
-  ]
+  ],
+  "enabled": false
 }
