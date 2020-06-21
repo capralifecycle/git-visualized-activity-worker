@@ -15,7 +15,7 @@ https://github.com/capralifecycle/aws-infrastructure/tree/master/cloudformation/
 
 ```bash
 # Fetch configuration from this namespace.
-export PARAMS_PREFIX=/git-visualized-activity/prod
+export PARAMS_PREFIX=/incub-gva-worker
 
 # To override configuration, these can be set.
 export CALS_GITHUB_TOKEN=personal-access-token-read-scope
@@ -26,7 +26,7 @@ export CF_DISTRIBUTION=cloudfront-distribution-to-invalidate
 docker build -t gva-test .
 
 # Run locally. Edit aws-vault target profile.
-aws-vault exec capra -- \
+aws-vault exec liflig-incubator-admin -- \
   docker run \
     -it --rm \
     -v "$PWD:/data" \
