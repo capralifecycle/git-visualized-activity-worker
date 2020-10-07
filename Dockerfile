@@ -24,7 +24,7 @@ COPY * /app/
 WORKDIR /app
 
 # renovate: datasource=npm depName=@capraconsulting/cals-cli
-ENV CALS_CLI_VERSION=2.9.4
+ENV CALS_CLI_VERSION=2.9.7
 
 RUN npm install -g @capraconsulting/cals-cli@${CALS_CLI_VERSION}
 
